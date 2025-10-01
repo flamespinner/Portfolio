@@ -170,15 +170,15 @@ const cardData = [
         fullDescription: 'Official website for Calico County Roleplay, a RedM roleplay community. Features server rules, application system, community announcements, and player resources. Built with Next.js for optimal performance and SEO.'
       },
       {
-        title: 'Calico Core',
-        description: 'Documentation and resource hub for Calico County RP server administrators and developers.',
+        title: 'Calico Core - User Management Platform',
+        description: 'Main Player Hub for RedM Community Calico County RP.',
         category: 'web',
         liveUrl: 'https://core.calicocountyrp.com',
-        techStack: ['Gatsby', 'React', 'Netlify', 'Markdown'],
-        features: ['Technical documentation', 'API reference', 'Developer guides', 'Search functionality'],
+        techStack: ['React', 'Node.js', 'Discord API', 'MariaDB'],
+        features: ['Seamless Discord authentication', 'Real-time character roster management', 'Admin dashboard for community moderation', 'Player System Tools'],
         status: 'Active Production',
         timeline: '2020–Present',
-        fullDescription: 'Internal documentation platform for Calico County RP development team. Provides comprehensive guides, API documentation, and technical resources for server administrators and plugin developers.'
+        fullDescription: 'A full-stack web application serving 500+ active role-players with Discord OAuth, real-time character management, and administrative tools to aid in management and configuration of the county.'
       },
       {
         title: 'Portfolio (2024)',
