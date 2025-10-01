@@ -185,7 +185,7 @@ const cardData = [
         description: 'Previous iteration of personal portfolio site hosted on GitHub Pages.',
         category: 'web',
         githubUrl: 'https://github.com/flamespinner/michaelwilke.github.io',
-        liveUrl: undefined,
+        liveUrl: 'http://v1.michaelwilke.com/',
         techStack: ['HTML', 'CSS', 'JavaScript', 'GitHub Pages'],
         features: ['Static hosting', 'Responsive design', 'Project gallery', 'Contact form'],
         status: 'Archive',
