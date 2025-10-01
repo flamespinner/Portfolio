@@ -208,6 +208,7 @@ const cardData = [
         description: 'Corporate website for EnArch Technologies showcasing services and company information.',
         category: 'web',
         githubUrl: "https://github.com/flamespinner/EnArchTechnologies",
+        liveUrl: 'http://et.michaelwilke.com/',
         techStack: ['HTML', 'CSS', 'JavaScript', 'PHP'],
         features: ['Multi-language support', 'Service pages', 'Contact forms', 'Company portfolio'],
         status: 'Archive',
