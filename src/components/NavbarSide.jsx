@@ -27,7 +27,7 @@ export default function NavbarSide() {
       {/* Logo / Home Link */}
       <div style={{ fontWeight: 700, marginBottom: '16px' }}>
         <Link
-          to="/home"
+          to="/"
           style={{
             color: 'white',
             textDecoration: 'none',
