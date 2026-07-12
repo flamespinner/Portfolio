@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaArrowRight } from "react-icons/fa";
 import CodeWindow from "../components/CodeWindow"; // adjust path if needed
+import { useNavigate } from "react-router-dom";
 
 
 export default function PortfolioHomepage() {
+  const navigate = useNavigate();
   const LINE1 = "Hello! I'm Michael!";
   const LINE2 = "";
 
@@ -189,7 +191,7 @@ export default function PortfolioHomepage() {
                 e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
                 e.currentTarget.style.background = "rgba(26, 26, 26, 0.7)";
               }}
-              onClick={() => window.location.href = "/aboutme"}
+              onClick={() => navigate("/aboutme")}
             >
               <div style={{ 
                 display: "flex", 
@@ -236,7 +238,7 @@ export default function PortfolioHomepage() {
                 e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
                 e.currentTarget.style.background = "rgba(26, 26, 26, 0.7)";
               }}
-              onClick={() => window.location.href = "/projects"}
+              onClick={() => navigate("/projects")}
             >
               <div style={{ 
                 display: "flex", 
@@ -300,7 +302,7 @@ export default function PortfolioHomepage() {
                 e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
                 e.currentTarget.style.background = "rgba(26, 26, 26, 0.7)";
               }}
-              onClick={() => window.location.href = "/contact"}
+              onClick={() => navigate("/contact")}
             >
               <div style={{ 
                 display: "flex", 

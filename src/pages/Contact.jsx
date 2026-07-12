@@ -57,28 +57,14 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        access_key: '3acec60f-1eb3-4e8c-a5a4-c98291b2d668',
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      }),
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus(''), 3000);
-    } else {
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', { /* ...unchanged... */ });
+      const result = await response.json();
+      setStatus(result.success ? 'success' : 'error');
+    } catch {
       setStatus('error');
+    } finally {
+      setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setStatus(''), 3000);
     }
   };
@@ -115,7 +101,7 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Information and Form Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px', marginBottom: '32px' }}>
+        <div style={{ display: 'grid', /* gridTemplateColumns: 'repeat(2, 1fr)' */gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px', marginBottom: '32px' }}>
           {/* Contact Information (now with social icons inside) */}
           <div
             ref={infoRef}

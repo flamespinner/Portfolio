@@ -6,40 +6,38 @@ import Lottie from 'lottie-react';
 import serverAnim from '../assets/wired-outline-57-server-hover-pinch.json';
 import cloudAnim from '../assets/wired-outline-1-cloud-hover-pinch.json';
 import headshot from '../assets/headshot.jpg';
+import { Link } from 'react-router-dom';
 
 
 const timelineEvents = [
   { 
-    year: '2024', 
-    title: 'Database Administrator at AION Management', 
-    description: 'Managing SQL Server databases, optimizing performance, and maintaining ETL processes for high availability and data integrity.',
-    icon: <FaDatabase />,
-    type: 'work'
+    year: '2024', title: 'Data Analyst & IT Systems Administrator — AION Management',
+    description: 'Own the reporting suite (SQL Server, Power BI/Fabric, Python ETL) and manage IT infrastructure; build custom internal applications.',
+    icon: <FaDatabase />, type: 'work' 
   },
   { 
-    year: '2023', 
-    title: 'Tier 2 Technical Support at AION Management', 
-    description: 'Providing advanced technical support for complex system issues, troubleshooting escalated tickets, and supporting infrastructure maintenance.',
-    icon: <FaDatabase />,
-    type: 'work'
+    year: '2023', title: 'Tier 2 Technical Support — AION Management',
+    description: 'Advanced support for complex system issues and escalated tickets; infrastructure maintenance.',
+    icon: <FaServer />, type: 'work' 
   },
   { 
-    year: '2018', 
-    title: 'Contract Help Desk Technician at Erickson Marine', 
-    description: 'Supporting 20+ IT devices, managing Jira ticketing system, and upgraded network infrastructure to Ubiquiti UniFi equipment.',
-    icon: <FaDatabase />,
-    type: 'contract'
+    year: '2020', title: 'Lead Developer — Calico County RP (RedM)',
+    description: 'Lead a Lua/JS development team for a 500+ player roleplay community; built Calico Core (React web platform, Vue NUI) with Discord OAuth and admin tooling.',
+    icon: <FaGamepad />, type: 'project' 
   },
   { 
-    year: '2016', 
-    title: 'IT Support at Renstrom Dental Studio', 
-    description: 'Maintained Windows Server systems, upgraded PCs to meet software requirements, and performed CAD/CAM scanning for dental model design.',
-    icon: <FaDatabase />,
-    type: 'work'
+    year: '2018', title: 'Contract Help Desk Technician — Erickson Marine',
+    description: 'Supported 20+ IT devices, managed Jira ticketing, upgraded network to Ubiquiti UniFi. (Ended July 2023.)',
+    icon: <FaNetworkWired />, type: 'contract' 
+  },
+  { 
+    year: '2016', title: 'IT Support — Renstrom Dental Studio',
+    description: 'Maintained Windows Server systems, PC upgrades, CAD/CAM scanning.',
+    icon: <FaServer />, type: 'work' 
   },
 ];
 
-const skills = [
+/* const skills = [
   { name: 'JavaScript/TypeScript', level: 95, category: 'Frontend', icon: <FaCode /> },
   { name: 'React/Node.js', level: 90, category: 'Full Stack', icon: <FaCode /> },
   { name: 'SQL Server/ETL', level: 95, category: 'Data Engineering', icon: <FaDatabase /> },
@@ -48,35 +46,33 @@ const skills = [
   { name: 'Docker/DevOps', level: 75, category: 'Infrastructure', icon: <FaCog /> },
   { name: 'Linux/Windows Server', level: 80, category: 'Infrastructure', icon: <FaServer /> },
   { name: 'WebDesign', level: 85, category: 'UI/UX', icon: <TbWorldWww /> },
+]; */
+
+const skills = [
+  { category: 'Data & Analytics', icon: <FaDatabase />, skills: ['SQL Server', 'T-SQL', 'Power BI / Fabric', 'Python ETL'] },
+  { category: 'Web Development', icon: <FaCode />, skills: ['JavaScript/TypeScript', 'React', 'Vue', 'Node.js'] },
+  { category: 'Infrastructure & Cloud', icon: <FaCloud />, skills: ['PowerShell', 'Azure', 'Windows Server', 'Linux', 'Intune/RMM'] },
+  { category: 'Game Development', icon: <FaGamepad />, skills: ['Lua', 'RedM/FiveM', 'NUI (Vue)', 'MariaDB'] },
 ];
 
 
 const achievements = [
-  {
-    title: 'Performance Optimization',
-    description: 'Reduced page load time by 35% through optimized asset bundling and lazy loading.',
-    impact: '35% faster'
+  { 
+    title: 'SQL Restore Automation', impact: 'Zero-touch',
+    description: 'Event-driven Azure pipeline that restores SQL Server databases from blob storage automatically — in production at AION.' 
   },
-  {
-    title: 'Team Leadership',
-    description: 'Led a cross-functional team to deliver a micro-service architecture for a SaaS product.',
-    impact: 'Full migration'
+  { 
+    title: 'AION Reporting Suite', impact: 'Company-wide',
+    description: 'Built and maintain the reporting stack: SQL Server, Power BI/Fabric, Python ETL.' 
   },
-  {
-    title: 'Knowledge Sharing',
-    description: 'Mentored junior developers and organized internal knowledge-sharing sessions.',
-    impact: '10+ developers'
+  { 
+    title: 'Calico Core Platform', impact: '500+ players',
+    description: 'Full-stack player management platform with Discord OAuth, character rosters, and admin tools.' 
   },
-  {
-    title: 'System Scalability',
-    description: 'Designed and implemented a scalable architecture that supported 500,000+ users.',
-    impact: '500k+ users'
+  { 
+    title: 'Community Leadership', impact: '5+ years',
+    description: 'Lead developer of Calico County RP since 2020 — roadmap, code review, and a volunteer dev team.' 
   },
-  {
-    title: 'Automation Efficiency',
-    description: 'Automated repetitive tasks using PowerShell and Azure DevOps, reducing manual effort by 40%.',
-    impact: '40% reduction in manual effort'
-  }
 ];
 
 export default function AboutMe() {
@@ -203,11 +199,15 @@ export default function AboutMe() {
               
               <div style={{ textAlign: 'center' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <a href="/contact" style={buttonStyle}>
+                  <Link to="/contact" style={buttonStyle}>
                     <Lottie animationData={serverAnim} loop={true} style={{ width: '25px', height: '25px' }} />
                     Contact Me
-                  </a>
-                  <a href="/CV.pdf" download style={{
+                  </Link>
+{/*                   <a href="/contact" style={buttonStyle}>
+                    <Lottie animationData={serverAnim} loop={true} style={{ width: '25px', height: '25px' }} />
+                    Contact Me
+                  </a> */}
+                  <a href="/public/cv.PDF" download style={{
                     ...buttonStyle,
                     background: 'transparent',
                     border: '1px solid #1d4ed8',
@@ -506,10 +506,14 @@ export default function AboutMe() {
               Ready to bring your ideas to life? I'm always excited to work on challenging projects.
             </p>
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-              <a href="/contact" style={buttonStyle}>
+              <Link to="/contact" style={buttonStyle}>
                 <FaEnvelope size={18} />
                 Start a Conversation
-              </a>
+              </Link>
+{/*               <a href="/contact" style={buttonStyle}>
+                <FaEnvelope size={18} />
+                Start a Conversation
+              </a> */}
               <a href="/projects" style={{
                 ...buttonStyle,
                 background: 'transparent',
