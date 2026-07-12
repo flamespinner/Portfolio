@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 const timelineEvents = [
   { 
-    year: '2024', title: 'Data Analyst & IT Systems Administrator — AION Management',
+    year: '2024', title: 'IT Systems & Data Analyst — AION Management',
     description: 'Own the reporting suite (SQL Server, Power BI/Fabric, Python ETL) and manage IT infrastructure; build custom internal applications.',
     icon: <FaDatabase />, type: 'work' 
   },
@@ -20,13 +20,13 @@ const timelineEvents = [
     icon: <FaServer />, type: 'work' 
   },
   { 
-    year: '2020', title: 'Lead Developer — Calico County RP (RedM)',
-    description: 'Lead a Lua/JS development team for a 500+ player roleplay community; built Calico Core (React web platform, Vue NUI) with Discord OAuth and admin tooling.',
+    year: '2022', title: 'Founder & Lead Developer — Calico County RP (RedM)',
+    description: 'Founded and lead development of a 300+ member roleplay community; built Calico Core (React web platform, Vue NUI) with Discord OAuth and admin tooling.',
     icon: <FaGamepad />, type: 'project' 
   },
   { 
-    year: '2018', title: 'Contract Help Desk Technician — Erickson Marine',
-    description: 'Supported 20+ IT devices, managed Jira ticketing, upgraded network to Ubiquiti UniFi. (Ended July 2023.)',
+    year: '2018', title: 'IT Systems Specialist — Erickson Marine (Contract)',
+    description: 'Sole IT professional for a marine services company: Windows Server administration, Ubiquiti UniFi network, Jira ticketing. Ongoing freelance client since 2023 — led their Server 2012 → 2025 migration.',
     icon: <FaNetworkWired />, type: 'contract' 
   },
   { 
@@ -65,12 +65,12 @@ const achievements = [
     description: 'Built and maintain the reporting stack: SQL Server, Power BI/Fabric, Python ETL.' 
   },
   { 
-    title: 'Calico Core Platform', impact: '500+ players',
+    title: 'Calico Core Platform', impact: '300+ members',
     description: 'Full-stack player management platform with Discord OAuth, character rosters, and admin tools.' 
   },
   { 
-    title: 'Community Leadership', impact: '5+ years',
-    description: 'Lead developer of Calico County RP since 2020 — roadmap, code review, and a volunteer dev team.' 
+    title: 'Community Leadership', impact: 'Since 2022',
+    description: 'Founder and lead developer of Calico County RP — roadmap, code review, and a two-person dev team within a four-person staff.'
   },
 ];
 
@@ -206,7 +206,7 @@ export default function AboutMe() {
                     <Lottie animationData={serverAnim} loop={true} style={{ width: '25px', height: '25px' }} />
                     Contact Me
                   </a> */}
-                  <a href="/public/cv.PDF" download style={{
+                  <a href="/CV.pdf?v=2" download="Michael_Wilke_CV.pdf" style={{
                     ...buttonStyle,
                     background: 'transparent',
                     border: '1px solid #1d4ed8',
