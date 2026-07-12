@@ -4,7 +4,6 @@ import { FaServer, FaNetworkWired, FaEnvelope, FaFilePdf, FaCode, FaDatabase, Fa
 import { TbWorldWww } from "react-icons/tb";
 import Lottie from 'lottie-react';
 import serverAnim from '../assets/wired-outline-57-server-hover-pinch.json';
-import cloudAnim from '../assets/wired-outline-1-cloud-hover-pinch.json';
 import headshot from '../assets/headshot.jpg';
 import { Link } from 'react-router-dom';
 

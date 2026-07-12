@@ -153,7 +153,7 @@ export default function ContactPage() {
                 <FaGithub />
               </a>
               <a
-                href="https://linkedin.com/in/michaelwilke"
+                href="https://www.linkedin.com/in/michaelwfwilke/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: '#d1d5db', fontSize: '2rem' }}

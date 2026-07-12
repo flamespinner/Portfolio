@@ -11,7 +11,7 @@ export default function PortfolioHomepage() {
   const LINE2 = "";
 
   const [typed1, setTyped1] = useState("");
-  const [typed2, setTyped2] = useState("");
+  const [typed2, _setTyped2] = useState("");
   const [showSplit, setShowSplit] = useState(false);
   const [cursorOn, setCursorOn] = useState(true);
 
