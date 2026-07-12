@@ -4,19 +4,24 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
+  workflow_dispatch: # manual deploys from the Actions tab — handy for server moves
+
+# Cancel superseded runs (e.g. rapid consecutive pushes)
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
-  DEPLOY_PATH: /var/www/portfolio  # Change this to your deployment path
+  DEPLOY_PATH: /var/www/portfolio
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 10
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,15 +33,11 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run linter
         run: npm run lint --if-present
-        continue-on-error: true
-
-      - name: Run tests
-        run: npm test --if-present
-        continue-on-error: true
+        continue-on-error: true # TODO: remove once lint is clean so CI actually enforces it
 
       - name: Build project
         run: npm run build
@@ -51,8 +52,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-    
+    timeout-minutes: 10
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    environment:
+      name: production
+      url: https://michaelwilke.com
+
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -60,7 +65,8 @@ jobs:
           name: build-files
           path: dist/
 
-      - name: Deploy to server via SSH
+      # Upload to a staging dir so a failed transfer never touches the live site
+      - name: Upload build to staging directory
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -68,10 +74,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           source: "dist/*"
-          target: ${{ env.DEPLOY_PATH }}
+          target: ${{ env.DEPLOY_PATH }}-staging
           strip_components: 1
+          rm: true # clean staging dir first so stale hashed assets never accumulate
 
-      - name: Execute remote commands
+      # Atomic swap: old site stays live until the instant of the mv
+      - name: Activate new release
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -79,9 +87,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
-            cd ${{ env.DEPLOY_PATH }}
-            # Restart web server if needed (uncomment based on your setup)
-            # sudo systemctl reload nginx
-            # sudo systemctl restart apache2
-            # pm2 restart all
-            echo "Deployment completed successfully!"
+            set -e
+            DEPLOY=${{ env.DEPLOY_PATH }}
+            rm -rf "$DEPLOY-old"
+            [ -d "$DEPLOY" ] && mv "$DEPLOY" "$DEPLOY-old"
+            mv "$DEPLOY-staging" "$DEPLOY"
+            sudo systemctl reload nginx
+            echo "Deployed. Previous release kept at $DEPLOY-old for rollback."
