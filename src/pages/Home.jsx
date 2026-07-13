@@ -12,7 +12,8 @@ export default function PortfolioHomepage() {
 
   const [typed1, setTyped1] = useState("");
   const [typed2, _setTyped2] = useState("");
-  const [showSplit, setShowSplit] = useState(false);
+  // Skip the typing intro if it already played this session
+  const [showSplit, setShowSplit] = useState(() => !!sessionStorage.getItem("introPlayed"));
   const [cursorOn, setCursorOn] = useState(true);
 
   // Blink cursor
@@ -23,6 +24,8 @@ export default function PortfolioHomepage() {
 
   // Type Line 1, then Line 2, then show split layout
   useEffect(() => {
+    if (showSplit) return; // intro already played this session
+
     let cancelled = false;
 
     const typeLine = async (text, setter, delay = 50) => {
@@ -35,8 +38,12 @@ export default function PortfolioHomepage() {
 
     (async () => {
       await typeLine(LINE1, setTyped1, 100);
-      await new Promise((res) => setTimeout(res, 300));;
-      if (!cancelled) setShowSplit(true);
+      await new Promise((res) => setTimeout(res, 300));
+      if (!cancelled) {
+        sessionStorage.setItem("introPlayed", "1");
+        window.dispatchEvent(new Event("intro:done"));
+        setShowSplit(true);
+      }
     })();
 
     return () => {

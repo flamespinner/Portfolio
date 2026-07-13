@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaHome, FaFolderOpen, FaUser, FaEnvelope, FaFilePdf } from 'react-icons/fa';
 import headshot from '../assets/headshot.jpg';
 import '../Sidebar.css';
@@ -12,8 +13,26 @@ const navItems = [
 ];
 
 export default function NavbarSide() {
+  const location = useLocation();
+  // Hide until the Home intro finishes, but only on a fresh visit landing on "/"
+  const [hidden, setHidden] = useState(
+    () => location.pathname === '/' && !sessionStorage.getItem('introPlayed')
+  );
+
+  useEffect(() => {
+    if (!hidden) return;
+    const reveal = () => setHidden(false);
+    window.addEventListener('intro:done', reveal);
+    return () => window.removeEventListener('intro:done', reveal);
+  }, [hidden]);
+
   return (
-    <nav className="sidebar">
+    <motion.nav
+      className="sidebar"
+      initial={false}
+      animate={{ x: hidden ? -270 : 0, opacity: hidden ? 0 : 1 }}
+      transition={{ duration: 0.55, ease: 'easeOut' }}
+    >
       <img src={headshot} alt="Michael Wilke" className="sidebar__avatar" />
       <Link to="/" className="sidebar__name">Michael Wilke</Link>
       <div className="sidebar__role">Data Analyst · IT Systems Admin<br />Full-Stack Developer</div>
@@ -48,6 +67,6 @@ export default function NavbarSide() {
           </a>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
