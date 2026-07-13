@@ -25,7 +25,7 @@ export default function PortfolioHomepage() {
   useEffect(() => {
     let cancelled = false;
 
-    const typeLine = async (text, setter, delay = 60) => {
+    const typeLine = async (text, setter, delay = 50) => {
       for (let i = 0; i <= text.length; i++) {
         if (cancelled) return;
         setter(text.slice(0, i));
