@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaLock, FaChartBar, FaCog, FaGamepad, FaRobot, FaCloud, FaGlobe, FaFolderOpen } from 'react-icons/fa';
 
@@ -37,9 +37,23 @@ const modalVariants = {
 };
 
 const ProjectModal = ({ isOpen, onClose, project = null }) => {
+  const [lightbox, setLightbox] = useState(null); // screenshot index or null
+  const lightboxRef = useRef(null);
+  lightboxRef.current = lightbox;
+
   useEffect(() => {
     if (!isOpen) return;
-    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    const onKey = (e) => {
+      const shots = project?.screenshots || [];
+      if (e.key === 'Escape') {
+        if (lightboxRef.current !== null) setLightbox(null);
+        else onClose();
+      }
+      if (lightboxRef.current !== null && shots.length > 1) {
+        if (e.key === 'ArrowRight') setLightbox((i) => (i + 1) % shots.length);
+        if (e.key === 'ArrowLeft') setLightbox((i) => (i - 1 + shots.length) % shots.length);
+      }
+    };
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -143,6 +157,29 @@ const ProjectModal = ({ isOpen, onClose, project = null }) => {
               {project.fullDescription || project.description || ''}
             </p>
 
+            {project.screenshots && project.screenshots.length > 0 && (
+              <div style={{ marginBottom: 20 }}>
+                <h4 style={{ margin: '0 0 10px', color: '#a8a29e', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Screenshots</h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
+                  {project.screenshots.map((shot, idx) => (
+                    <img
+                      key={shot.src}
+                      src={shot.src}
+                      alt={shot.caption || project.title}
+                      loading="lazy"
+                      onClick={() => setLightbox(idx)}
+                      style={{
+                        width: '100%', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)',
+                        display: 'block', cursor: 'zoom-in', transition: 'border-color 0.25s ease'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(251,146,60,0.5)'}
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
             {project.techStack && (
               <div style={{ marginBottom: 20 }}>
                 <h4 style={{ margin: '0 0 10px', color: '#a8a29e', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Tech stack</h4>
@@ -210,7 +247,7 @@ const ProjectModal = ({ isOpen, onClose, project = null }) => {
                       background: 'linear-gradient(135deg,#fb923c,#ea580c)', color: '#1c1210', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem'
                     }}
                   >
-                    <FaExternalLinkAlt size={14} /> Live Site
+                    <FaExternalLinkAlt size={14} /> {project.authRequired ? 'Live Site (login gated)' : 'Live Site'}
                   </a>
                 )}
                 {!project.githubUrl && !project.liveUrl && (
@@ -221,6 +258,53 @@ const ProjectModal = ({ isOpen, onClose, project = null }) => {
               </div>
             </div>
           </motion.div>
+
+          {/* Screenshot lightbox */}
+          {lightbox !== null && project.screenshots?.[lightbox] && (
+            <div
+              onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+              style={{
+                position: 'fixed', inset: 0, zIndex: 10000,
+                background: 'rgba(0,0,0,0.88)',
+                display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center',
+                padding: 24, cursor: 'zoom-out'
+              }}
+            >
+              <img
+                src={project.screenshots[lightbox].src}
+                alt={project.screenshots[lightbox].caption || project.title}
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  maxWidth: '92vw', maxHeight: '82vh', borderRadius: 10,
+                  border: '1px solid rgba(251,146,60,0.3)', cursor: 'default',
+                  boxShadow: '0 20px 60px rgba(0,0,0,0.7)'
+                }}
+              />
+              <div style={{ marginTop: 14, color: '#d6d3d1', fontSize: '0.9rem', display: 'flex', gap: 16, alignItems: 'center' }}>
+                {project.screenshots.length > 1 && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + project.screenshots.length) % project.screenshots.length); }}
+                    aria-label="Previous screenshot"
+                    style={{ background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 8, color: '#fff', padding: '6px 14px', cursor: 'pointer', fontSize: '1rem' }}
+                  >‹</button>
+                )}
+                <span>
+                  {project.screenshots[lightbox].caption}
+                  {project.screenshots.length > 1 && (
+                    <span style={{ color: '#78716c' }}> · {lightbox + 1}/{project.screenshots.length}</span>
+                  )}
+                </span>
+                {project.screenshots.length > 1 && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % project.screenshots.length); }}
+                    aria-label="Next screenshot"
+                    style={{ background: 'rgba(255,255,255,0.08)', border: 'none', borderRadius: 8, color: '#fff', padding: '6px 14px', cursor: 'pointer', fontSize: '1rem' }}
+                  >›</button>
+                )}
+              </div>
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

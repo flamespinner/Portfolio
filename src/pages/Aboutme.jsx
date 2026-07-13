@@ -55,7 +55,7 @@ const achievements = [
     description: 'Built and maintain the reporting stack: SQL Server, Power BI/Fabric, Python ETL.' 
   },
   { 
-    title: 'Calico Core Platform', impact: '300+ members',
+    title: 'Calico Core Platform', impact: '600+ players',
     description: 'Full-stack player management platform with Discord OAuth, character rosters, and admin tools.' 
   },
   { 
