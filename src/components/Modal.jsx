@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaLock, FaChartBar, FaCog, FaGamepad, FaRobot, FaCloud, FaGlobe, FaFolderOpen } from 'react-icons/fa';
 
-const getProjectIcon = (category) => {
-  const icons = {
-    data: '📊',
-    automation: '⚙️',
-    game: '🎮',
-    bot: '🤖',
-    cloud: '☁️',
-    web: '🌐'
-  };
-  return icons[category] || '📁';
+const categoryIcons = {
+  data: <FaChartBar />,
+  automation: <FaCog />,
+  game: <FaGamepad />,
+  bot: <FaRobot />,
+  bots: <FaRobot />,
+  cloud: <FaCloud />,
+  web: <FaGlobe />
+};
+
+const getProjectIcon = (category) => categoryIcons[category] || <FaFolderOpen />;
+
+const statusColors = (status = '') => {
+  if (/archive/i.test(status)) return { background: 'rgba(148,163,184,0.12)', color: '#94a3b8', border: '1px solid rgba(148,163,184,0.3)' };
+  if (/rebuild|planned|wip/i.test(status)) return { background: 'rgba(245,158,11,0.15)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.35)' };
+  return { background: 'rgba(34,197,94,0.15)', color: '#4ade80', border: '1px solid rgba(34,197,94,0.35)' };
 };
 
 const backdropVariants = {
@@ -30,7 +36,7 @@ const modalVariants = {
   exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.18 } }
 };
 
-const ProjectModal = ({ isOpen, onClose, project = null, category = null, items = [], onOpenProject }) => {
+const ProjectModal = ({ isOpen, onClose, project = null }) => {
   useEffect(() => {
     if (!isOpen) return;
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -43,7 +49,7 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !project) return null;
 
   return (
     <AnimatePresence>
@@ -79,7 +85,7 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
               border: '1px solid rgba(251,146,60,0.18)',
               borderRadius: 16,
               padding: 28,
-              maxWidth: '1100px',
+              maxWidth: 760,
               width: '100%',
               maxHeight: '85vh',
               overflowY: 'auto',
@@ -87,7 +93,6 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
               color: '#fff',
               boxShadow: '0 20px 60px rgba(0,0,0,0.6)'
             }}
-            layout
           >
             <button
               onClick={onClose}
@@ -112,297 +117,109 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
               <FaTimes />
             </button>
 
-            {/* Use layout keyed container so switching from list -> individual animates */}
-            <motion.div layout key={project ? `project-${project.title}` : `list-${category || 'items'}`}>
-              {/* Individual project view */}
-              {project && (
-                <>
-                  <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 18 }}>
-                    <div style={{
-                      width: 52, height: 52, borderRadius: 12, display: 'flex',
-                      alignItems: 'center', justifyContent: 'center', background: 'rgba(251,146,60,0.08)'
-                    }}>
-                      <span style={{ fontSize: 22 }}>{getProjectIcon(project.category)}</span>
-                    </div>
-                    <div>
-                      <h2 style={{ margin: 0, fontSize: '1.6rem' }}>{project.title}</h2>
-                      {project.label && <div style={{ color: '#fb923c', fontWeight: 600 }}>{project.label}</div>}
-                    </div>
-                  </div>
-
-                  <p style={{ color: '#d0d0d0', lineHeight: 1.6, marginBottom: 18 }}>
-                    {project.fullDescription || project.description || ''}
-                  </p>
-
-                  {project.techStack && (
-                    <div style={{ marginBottom: 18, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                      <h3 style={{ margin: 0, marginBottom: 8, color: '#fff' }}>Tech Stack</h3>
-                      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
-                        {project.techStack.map((t, i) => (
-                          <span key={i} style={{
-                            background: 'rgba(251,146,60,0.08)',
-                            color: '#fdba74',
-                            padding: '6px 10px',
-                            borderRadius: 14,
-                            fontSize: 13,
-                            border: '1px solid rgba(251,146,60,0.06)'
-                          }}>{t}</span>
-                        ))}
-                      </div>
-                    </div>
+            {/* Header */}
+            <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 18, paddingRight: 48 }}>
+              <div style={{
+                width: 52, height: 52, borderRadius: 12, display: 'flex', flex: '0 0 52px',
+                alignItems: 'center', justifyContent: 'center', background: 'rgba(251,146,60,0.1)',
+                color: '#fb923c', fontSize: 22
+              }}>
+                {getProjectIcon(project.category)}
+              </div>
+              <div style={{ minWidth: 0 }}>
+                <h2 style={{ margin: 0, fontSize: '1.5rem', lineHeight: 1.2 }}>{project.title}</h2>
+                <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginTop: 6, flexWrap: 'wrap' }}>
+                  {project.label && <span style={{ color: '#fb923c', fontWeight: 600, fontSize: '0.85rem' }}>{project.label}</span>}
+                  {project.status && (
+                    <span style={{ ...statusColors(project.status), fontSize: '0.7rem', padding: '3px 10px', borderRadius: 999 }}>
+                      {project.status}
+                    </span>
                   )}
+                </div>
+              </div>
+            </div>
 
-                  {project.features && (
-                    <div style={{ marginBottom: 18 }}>
-                      <h4 style={{ margin: '0 0 8px 0' }}>Key Features</h4>
-                      <ul style={{ margin: 0, paddingLeft: 18, color: '#cfcfcf' }}>
-                        {project.features.map((f, i) => <li key={i} style={{ marginBottom: 6 }}>{f}</li>)}
-                      </ul>
-                    </div>
-                  )}
+            <p style={{ color: '#d6d3d1', lineHeight: 1.6, margin: '0 0 20px' }}>
+              {project.fullDescription || project.description || ''}
+            </p>
 
-                  {/* Status / Timeline (side-by-side centered) */}
-                  {(project.status || project.timeline) && (
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      gap: 36,
-                      alignItems: 'center',
-                      padding: '12px 16px',
-                      background: 'rgba(251,146,60,0.04)',
-                      borderRadius: 8,
-                      border: '1px solid rgba(251,146,60,0.06)',
-                      marginBottom: 18
-                    }}>
-                      {project.status && (
-                        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                          <strong style={{ color: '#fdba74' }}>Status</strong>
-                          <span style={{ color: '#d0d0d0' }}>{project.status}</span>
-                        </div>
-                      )}
-                      {project.timeline && (
-                        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                          <strong style={{ color: '#fdba74' }}>Timeline</strong>
-                          <span style={{ color: '#d0d0d0' }}>{project.timeline}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
+            {project.techStack && (
+              <div style={{ marginBottom: 20 }}>
+                <h4 style={{ margin: '0 0 10px', color: '#a8a29e', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Tech stack</h4>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  {project.techStack.map((t) => (
+                    <span key={t} style={{
+                      background: 'rgba(251,146,60,0.08)',
+                      color: '#fdba74',
+                      padding: '5px 12px',
+                      borderRadius: 999,
+                      fontSize: 13,
+                      border: '1px solid rgba(251,146,60,0.15)'
+                    }}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            )}
 
-                  {/* Action buttons */}
-                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-                    {project.githubUrl ? (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          display: 'inline-flex', alignItems: 'center', gap: 8,
-                          padding: '10px 16px', borderRadius: 10, background: 'linear-gradient(135deg,#24292e,#1a1e22)',
-                          color: '#fff', textDecoration: 'none', fontWeight: 600
-                        }}
-                      >
-                        <FaGithub size={18} /> View Code
-                      </a>
-                    ) : (
-                      <span style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '10px 14px',
-                        borderRadius: '8px',
-                        background: 'rgba(255,255,255,0.02)',
-                        color: '#bbb',
-                        border: '1px solid rgba(255,255,255,0.03)',
-                        fontWeight: 600
-                      }}>
-                        <FaGithub size={14} /> Private
-                      </span>
-                    )}
+            {project.features && (
+              <div style={{ marginBottom: 20 }}>
+                <h4 style={{ margin: '0 0 10px', color: '#a8a29e', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Key features</h4>
+                <ul style={{ margin: 0, paddingLeft: 18, color: '#d6d3d1' }}>
+                  {project.features.map((f, i) => <li key={i} style={{ marginBottom: 6, lineHeight: 1.45 }}>{f}</li>)}
+                </ul>
+              </div>
+            )}
 
-                    {project.liveUrl ? (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          display: 'inline-flex', alignItems: 'center', gap: 8,
-                          padding: '10px 16px', borderRadius: 10,
-                          background: 'linear-gradient(135deg,#fb923c,#ea580c)', color: '#fff', textDecoration: 'none', fontWeight: 600
-                        }}
-                      >
-                        <FaExternalLinkAlt size={16} /> Live Demo
-                      </a>
-                    ) : (
-                      <span style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '10px 14px',
-                        borderRadius: '8px',
-                        background: 'rgba(255,255,255,0.02)',
-                        color: '#bbb',
-                        border: '1px solid rgba(255,255,255,0.03)',
-                        fontWeight: 600
-                      }}>
-                        <FaExternalLinkAlt size={14} /> No Demo
-                      </span>
-                    )}
+            {/* Footer: timeline + actions */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: 16,
+              flexWrap: 'wrap',
+              borderTop: '1px solid rgba(255,255,255,0.08)',
+              paddingTop: 18
+            }}>
+              <span style={{ color: '#a8a29e', fontSize: '0.85rem' }}>
+                {project.timeline}
+              </span>
 
-                    {/* Documentation link unchanged */}
-                  </div>
-                </>
-              )}
-
-              {/* Category / list view */}
-              {category && (
-                <>
-                  <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 14 }}>
-                    <div style={{
-                      width: 44, height: 44, borderRadius: 10, display: 'flex',
-                      alignItems: 'center', justifyContent: 'center', background: 'rgba(251,146,60,0.06)'
-                    }}>
-                      <span style={{ fontSize: 20 }}>{getProjectIcon(category)}</span>
-                    </div>
-                    <div>
-                      <h3 style={{ margin: 0 }}>{category.charAt(0).toUpperCase() + category.slice(1)} Projects</h3>
-                      <div style={{ color: '#cfcfcf', fontSize: 13 }}>{items.length} item{items.length !== 1 ? 's' : ''}</div>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'grid', gap: 12 }}>
-                    {items && items.length ? items.map((item, idx) => (
-                      <div
-                        key={idx}
-                        onClick={() => onOpenProject && onOpenProject(item)}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          padding: '12px 14px',
-                          background: 'rgba(255,255,255,0.02)',
-                          borderRadius: 12,
-                          border: '1px solid rgba(255,255,255,0.03)',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flex: 1, minWidth: 0 }}>
-                          <div style={{
-                            width: 44, height: 44, borderRadius: 8, display: 'flex', alignItems: 'center',
-                            justifyContent: 'center', background: 'rgba(251,146,60,0.06)', flex: '0 0 44px'
-                          }}>
-                            <span>{getProjectIcon(item.category)}</span>
-                          </div>
-                          <div style={{ overflow: 'hidden', minWidth: 0 }}>
-                            <div style={{ fontWeight: 700, textAlign: 'left', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                              {item.title}
-                            </div>
-                            <div style={{ color: '#cfcfcf', fontSize: 13, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                              {item.description}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginLeft: 12 }}>
-                          {/* shared button style */}
-                          {item.githubUrl ? (
-                            <a
-                              href={item.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 8,
-                                padding: '8px 12px',
-                                borderRadius: 8,
-                                background: 'linear-gradient(135deg,#24292e,#1a1e22)',
-                                color: '#fff',
-                                textDecoration: 'none',
-                                fontWeight: 600,
-                                minWidth: 72,
-                                justifyContent: 'center'
-                              }}
-                            >
-                              <FaGithub /> Code
-                            </a>
-                          ) : (
-                            <div
-                              role="button"
-                              aria-disabled="true"
-                              style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 8,
-                                padding: '8px 12px',
-                                borderRadius: 8,
-                                background: 'rgba(255,255,255,0.02)',
-                                color: '#bbb',
-                                border: '1px solid rgba(255,255,255,0.03)',
-                                fontWeight: 600,
-                                minWidth: 72,
-                                justifyContent: 'center',
-                                cursor: 'not-allowed'
-                              }}
-                            >
-                              <FaGithub /> Private
-                            </div>
-                          )}
-
-                          {item.liveUrl ? (
-                            <a
-                              href={item.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 8,
-                                padding: '8px 12px',
-                                borderRadius: 8,
-                                background: 'linear-gradient(135deg,#fb923c,#ea580c)',
-                                color: '#fff',
-                                textDecoration: 'none',
-                                fontWeight: 600,
-                                minWidth: 72,
-                                justifyContent: 'center'
-                              }}
-                            >
-                              <FaExternalLinkAlt /> Demo
-                            </a>
-                          ) : (
-                            <div
-                              role="button"
-                              aria-disabled="true"
-                              style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 8,
-                                padding: '8px 12px',
-                                borderRadius: 8,
-                                background: 'rgba(255,255,255,0.02)',
-                                color: '#bbb',
-                                border: '1px solid rgba(255,255,255,0.03)',
-                                fontWeight: 600,
-                                minWidth: 72,
-                                justifyContent: 'center',
-                                cursor: 'not-allowed'
-                              }}
-                            >
-                              <FaExternalLinkAlt /> No Demo
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )) : (
-                      <div style={{ color: '#bbb' }}>No items in this category.</div>
-                    )}
-                  </div>
-                </>
-              )}
-            </motion.div>
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 8,
+                      padding: '10px 16px', borderRadius: 10, background: 'linear-gradient(135deg,#24292e,#1a1e22)',
+                      color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem'
+                    }}
+                  >
+                    <FaGithub size={16} /> View Code
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 8,
+                      padding: '10px 16px', borderRadius: 10,
+                      background: 'linear-gradient(135deg,#fb923c,#ea580c)', color: '#1c1210', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem'
+                    }}
+                  >
+                    <FaExternalLinkAlt size={14} /> Live Site
+                  </a>
+                )}
+                {!project.githubUrl && !project.liveUrl && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: '#78716c', fontSize: '0.85rem' }}>
+                    <FaLock size={12} /> Internal project — happy to talk through it
+                  </span>
+                )}
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       )}
