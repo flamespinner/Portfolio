@@ -87,7 +87,7 @@ export default function ContactPage() {
               fontWeight: 'bold',
               color: 'white',
               marginBottom: '24px',
-              background: 'linear-gradient(to right, #c084fc, #ec4899)',
+              background: 'linear-gradient(to right, #fdba74, #ea580c)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
@@ -95,7 +95,7 @@ export default function ContactPage() {
           >
             Let's Connect!
           </h1>
-          <p style={{ fontSize: '1.25rem', color: '#d1d5db', maxWidth: '672px', margin: '0 auto', lineHeight: '1.75' }}>
+          <p style={{ fontSize: '1.25rem', color: '#d6d3d1', maxWidth: '672px', margin: '0 auto', lineHeight: '1.75' }}>
             Have a project in mind or want to collaborate? Feel free to reach out. <br /> I am always open to discussing new opportunities
           </p>
         </div>
@@ -120,16 +120,16 @@ export default function ContactPage() {
               <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '24px' }}>
                 Contact Information
               </h2>
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px', color: '#d1d5db' }}>
-                <MdEmail size={24} style={{ marginRight: '12px', color: '#c084fc' }} />
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px', color: '#d6d3d1' }}>
+                <MdEmail size={24} style={{ marginRight: '12px', color: '#fb923c' }} />
                 <span>mwilke199752@gmail.com</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px', color: '#d1d5db' }}>
-                <MdPhone size={24} style={{ marginRight: '12px', color: '#c084fc' }} />
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px', color: '#d6d3d1' }}>
+                <MdPhone size={24} style={{ marginRight: '12px', color: '#fb923c' }} />
                 <span>+1 (651) 703-6341</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', color: '#d1d5db' }}>
-                <MdLocationOn size={24} style={{ marginRight: '12px', color: '#c084fc' }} />
+              <div style={{ display: 'flex', alignItems: 'center', color: '#d6d3d1' }}>
+                <MdLocationOn size={24} style={{ marginRight: '12px', color: '#fb923c' }} />
                 <span>Saint Paul, MN</span>
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function ContactPage() {
                 href="https://github.com/flamespinner"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: '#d1d5db', fontSize: '2rem' }}
+                style={{ color: '#d6d3d1', fontSize: '2rem' }}
               >
                 <FaGithub />
               </a>
@@ -156,7 +156,7 @@ export default function ContactPage() {
                 href="https://www.linkedin.com/in/michaelwfwilke/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: '#d1d5db', fontSize: '2rem' }}
+                style={{ color: '#d6d3d1', fontSize: '2rem' }}
               >
                 <FaLinkedin />
               </a>
@@ -243,7 +243,7 @@ export default function ContactPage() {
                   width: '100%',
                   padding: '12px',
                   borderRadius: '8px',
-                  background: 'linear-gradient(to right, #c084fc, #ec4899)',
+                  background: 'linear-gradient(to right, #fdba74, #ea580c)',
                   color: 'white',
                   fontWeight: 'bold',
                   border: 'none',

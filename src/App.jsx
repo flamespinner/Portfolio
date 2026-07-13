@@ -11,16 +11,7 @@ export default function App() {
   return (
     <div>
       <NavbarSide />
-      {/* Simple wrapper with margin-left to push content right of sidebar */}
-      <div style={{
-        marginLeft: '250px',
-        /* width: 'calc(100vw - 250px)', */
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        /* padding: '2rem', */
-        boxSizing: 'border-box'
-      }}>
+      <div className="app-content">
         <div style={{ 
           width: '100%', 
           maxWidth: '1200px',

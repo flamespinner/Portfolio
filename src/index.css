@@ -5,9 +5,20 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1c1d22;
+  /* Cinder theme tokens */
+  --ember: #fb923c;
+  --ember-light: #fdba74;
+  --ember-deep: #ea580c;
+  --bg: #0e0d0c;
+  --card: rgba(28, 25, 23, 0.75);
+  --card-border: rgba(255, 255, 255, 0.09);
+  --text-1: #f5f2ee;
+  --text-2: #a8a29e;
+  --text-muted: #78716c;
+
+  color-scheme: dark;
+  color: #f5f2ee;
+  background-color: #0e0d0c;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,11 +28,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #fb923c;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #fdba74;
 }
 
 body {
@@ -41,30 +52,18 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #292524;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #fb923c;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
 .row {
   border: 2px solid red;

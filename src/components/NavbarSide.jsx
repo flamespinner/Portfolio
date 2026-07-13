@@ -1,137 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Link, NavLink } from 'react-router-dom';
+import { FaGithub, FaLinkedin, FaHome, FaFolderOpen, FaUser, FaEnvelope, FaFilePdf } from 'react-icons/fa';
+import headshot from '../assets/headshot.jpg';
+import '../Sidebar.css';
+
+const navItems = [
+  { to: '/', label: 'Home', icon: <FaHome /> },
+  { to: '/projects', label: 'Projects', icon: <FaFolderOpen /> },
+  { to: '/aboutme', label: 'About Me', icon: <FaUser /> },
+  { to: '/contact', label: "Let's Connect", icon: <FaEnvelope /> },
+];
 
 export default function NavbarSide() {
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '250px',
-        height: '100vh',
-        background: 'linear-gradient(180deg, rgba(15, 15, 23, 0.98), rgba(7, 7, 11, 0.98))',
-        borderRight: '1px solid rgba(255, 255, 255, 0.08)',
-        backdropFilter: 'blur(12px)',
-        color: '#fff',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start', // Align items to the top
-        alignItems: 'center',
-        padding: '20px',
-        boxSizing: 'border-box',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        zIndex: 1000,
-        transition: 'background 0.3s ease',
-      }}
-    >
-      {/* Logo / Home Link */}
-      <div style={{ fontWeight: 700, marginBottom: '16px' }}>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-            fontSize: '1.4rem',
-            fontWeight: 700,
-            transition: 'color 0.3s ease',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#9aa0ff'}
-          onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
-        >
-          <b>Michael Wilke</b>
-        </Link>
+    <nav className="sidebar">
+      <img src={headshot} alt="Michael Wilke" className="sidebar__avatar" />
+      <Link to="/" className="sidebar__name">Michael Wilke</Link>
+      <div className="sidebar__role">Data Analyst · IT Systems Admin<br />Full-Stack Developer</div>
+
+      <div className="sidebar__links">
+        {navItems.map(({ to, label, icon }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={to === '/'}
+            className={({ isActive }) => `sidebar__link${isActive ? ' sidebar__link--active' : ''}`}
+          >
+            {icon} <span>{label}</span>
+          </NavLink>
+        ))}
       </div>
 
-      {/* Navigation Links */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px', justifyContent: 'center', alignItems: 'center' }}>
-        <Link
-          to="/"
-          style={{
-            color: '#9aa0ff',
-            textDecoration: 'none',
-            fontSize: '1rem',
-            transition: 'color 0.3s ease',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#6c75f0'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#9aa0ff'}
-        >
-          Home
-        </Link>
-        <Link
-          to="/projects"
-          style={{
-            color: '#9aa0ff',
-            textDecoration: 'none',
-            fontSize: '1rem',
-            transition: 'color 0.3s ease',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#6c75f0'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#9aa0ff'}
-        >
-          Projects
-        </Link>
-        <Link
-          to="/aboutme"
-          style={{
-            color: '#9aa0ff',
-            textDecoration: 'none',
-            fontSize: '1rem',
-            transition: 'color 0.3s ease',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#6c75f0'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#9aa0ff'}
-        >
-          About Me
-        </Link>
-        <Link
-          to="/contact"
-          style={{
-            color: '#9aa0ff',
-            textDecoration: 'none',
-            fontSize: '1rem',
-            transition: 'color 0.3s ease',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#6c75f0'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#9aa0ff'}
-        >
-          Let's Connect
-        </Link>
-      </div>
+      <a href="/CV.pdf?v=2" download="Michael_Wilke_CV.pdf" className="sidebar__cta">
+        <FaFilePdf /> Resume
+      </a>
 
-      {/* Social Icons */}
-      <div style={{ display: 'flex', gap: '24px' }}>
-        <a
-          href="https://github.com/flamespinner/Portfolio"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: '#9aa0ff',
-            textDecoration: 'none',
-            fontSize: '1.2rem',
-            transition: 'color 0.3s ease',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#6c75f0'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#9aa0ff'}
-        >
-          <FaGithub />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/michaelwfwilke/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: '#9aa0ff',
-            textDecoration: 'none',
-            fontSize: '1.2rem',
-            transition: 'color 0.3s ease',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#6c75f0'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#9aa0ff'}
-        >
-          <FaLinkedin />
-        </a>
+      <div className="sidebar__footer">
+        <span className="sidebar__status">
+          <span className="sidebar__status-dot" /> Open to opportunities
+        </span>
+        <div className="sidebar__socials">
+          <a href="https://github.com/flamespinner" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <FaGithub />
+          </a>
+          <a href="https://www.linkedin.com/in/michaelwfwilke/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <FaLinkedin />
+          </a>
+        </div>
       </div>
     </nav>
   );

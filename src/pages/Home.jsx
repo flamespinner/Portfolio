@@ -104,7 +104,7 @@ export default function PortfolioHomepage() {
               <h1 style={{ fontSize: 48, margin: 0, marginBottom: 12 }}>
                 Hello! I'm Michael!
               </h1>
-              <h2 style={{ fontSize: 26, margin: 0, marginBottom: 20, color: "#bfbfbf" }}>
+              <h2 style={{ fontSize: 26, margin: 0, marginBottom: 20, color: "#d6d3d1" }}>
                 It's Nice to meet you
               </h2>
 
@@ -112,7 +112,7 @@ export default function PortfolioHomepage() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                style={{ marginBottom: 20, color: "#9aa3b2" }}
+                style={{ marginBottom: 20, color: "#a8a29e" }}
               >
                 <strong>Full-stack developer</strong> • Data & automation • tinkerer
               </motion.div>
@@ -171,7 +171,7 @@ export default function PortfolioHomepage() {
             {/* About Teaser */}
             <div
               style={{
-                background: "rgba(26, 26, 26, 0.7)",
+                background: "rgba(28, 25, 23, 0.75)",
                 backdropFilter: "blur(10px)",
                 WebkitBackdropFilter: "blur(10px)",
                 padding: 24,
@@ -183,13 +183,13 @@ export default function PortfolioHomepage() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                e.currentTarget.style.background = "rgba(26, 26, 26, 0.8)";
+                e.currentTarget.style.borderColor = "rgba(251, 146, 60, 0.45)";
+                e.currentTarget.style.background = "rgba(28, 25, 23, 0.85)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                e.currentTarget.style.background = "rgba(26, 26, 26, 0.7)";
+                e.currentTarget.style.background = "rgba(28, 25, 23, 0.75)";
               }}
               onClick={() => navigate("/aboutme")}
             >
@@ -202,10 +202,10 @@ export default function PortfolioHomepage() {
                 <h3 style={{ fontSize: 18, margin: 0, color: "#fff" }}>
                   About Me
                 </h3>
-                <FaArrowRight size={14} style={{ color: "#666" }} />
+                <FaArrowRight size={14} style={{ color: "#78716c" }} />
               </div>
               <p style={{ 
-                color: "#9aa3b2", 
+                color: "#a8a29e", 
                 lineHeight: 1.5, 
                 fontSize: 14,
                 margin: 0
@@ -218,7 +218,7 @@ export default function PortfolioHomepage() {
             {/* Featured Project Teaser */}
             <div
               style={{
-                background: "rgba(26, 26, 26, 0.7)",
+                background: "rgba(28, 25, 23, 0.75)",
                 backdropFilter: "blur(10px)",
                 WebkitBackdropFilter: "blur(10px)",
                 padding: 24,
@@ -230,13 +230,13 @@ export default function PortfolioHomepage() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                e.currentTarget.style.background = "rgba(26, 26, 26, 0.8)";
+                e.currentTarget.style.borderColor = "rgba(251, 146, 60, 0.45)";
+                e.currentTarget.style.background = "rgba(28, 25, 23, 0.85)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                e.currentTarget.style.background = "rgba(26, 26, 26, 0.7)";
+                e.currentTarget.style.background = "rgba(28, 25, 23, 0.75)";
               }}
               onClick={() => navigate("/projects")}
             >
@@ -249,10 +249,10 @@ export default function PortfolioHomepage() {
                 <h3 style={{ fontSize: 18, margin: 0, color: "#fff" }}>
                   Featured: Data Engineering
                 </h3>
-                <FaArrowRight size={14} style={{ color: "#666" }} />
+                <FaArrowRight size={14} style={{ color: "#78716c" }} />
               </div>
               <p style={{ 
-                color: "#9aa3b2", 
+                color: "#a8a29e", 
                 lineHeight: 1.5, 
                 fontSize: 14,
                 margin: 0,
@@ -267,10 +267,10 @@ export default function PortfolioHomepage() {
                     key={tech}
                     style={{
                       padding: "2px 6px",
-                      background: "#2a2a2a",
+                      background: "#292524",
                       borderRadius: "3px",
                       fontSize: "11px",
-                      color: "#bfbfbf",
+                      color: "#d6d3d1",
                     }}
                   >
                     {tech}
@@ -282,7 +282,7 @@ export default function PortfolioHomepage() {
             {/* Contact Teaser */}
             <div
               style={{
-                background: "rgba(26, 26, 26, 0.7)",
+                background: "rgba(28, 25, 23, 0.75)",
                 backdropFilter: "blur(10px)",
                 WebkitBackdropFilter: "blur(10px)",
                 padding: 24,
@@ -294,13 +294,13 @@ export default function PortfolioHomepage() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                e.currentTarget.style.background = "rgba(26, 26, 26, 0.8)";
+                e.currentTarget.style.borderColor = "rgba(251, 146, 60, 0.45)";
+                e.currentTarget.style.background = "rgba(28, 25, 23, 0.85)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                e.currentTarget.style.background = "rgba(26, 26, 26, 0.7)";
+                e.currentTarget.style.background = "rgba(28, 25, 23, 0.75)";
               }}
               onClick={() => navigate("/contact")}
             >
@@ -313,10 +313,10 @@ export default function PortfolioHomepage() {
                 <h3 style={{ fontSize: 18, margin: 0, color: "#fff" }}>
                   Let's Connect
                 </h3>
-                <FaArrowRight size={14} style={{ color: "#666" }} />
+                <FaArrowRight size={14} style={{ color: "#78716c" }} />
               </div>
               <p style={{ 
-                color: "#9aa3b2", 
+                color: "#a8a29e", 
                 lineHeight: 1.5, 
                 fontSize: 14,
                 margin: 0
@@ -334,7 +334,7 @@ export default function PortfolioHomepage() {
             transition={{ delay: 1.0 }}
             style={{ 
               textAlign: "center", 
-              color: "#666", 
+              color: "#78716c", 
               fontSize: 14 
             }}
           >

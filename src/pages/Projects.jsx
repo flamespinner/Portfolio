@@ -1,28 +1,29 @@
-import MagicBento from "../components/BentoGrid";
+import ProjectGrid from "../components/ProjectGrid";
 
 function Projects() {
   return (
-    <div style={{ textAlign: "center", marginBottom: "2rem", padding: "1rem" }}>
-      <h1 style={{ 
-        color: "#2575d6", 
-        fontSize: "2.5rem", 
-        fontWeight: "bold", 
-        textShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" 
+    <div style={{ width: "100%", marginBottom: "2rem", padding: "1rem" }}>
+      <h1 style={{
+        textAlign: "center",
+        fontSize: "2.5rem",
+        fontWeight: "bold",
+        marginBottom: "8px",
+        background: "linear-gradient(135deg, #fdba74, #ea580c)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text"
       }}>
         My Projects
       </h1>
-      <MagicBento 
-        textAutoHide={true}
-        enableStars={true}
-        enableSpotlight={true}
-        enableBorderGlow={true}
-        enableTilt={true}
-        enableMagnetism={true}
-        clickEffect={true}
-        spotlightRadius={300}
-        particleCount={12}
-        glowColor="132, 0, 255"
-      />
+      <p style={{
+        textAlign: "center",
+        color: "#a8a29e",
+        marginBottom: "32px",
+        fontSize: "1rem"
+      }}>
+        From SQL pipelines to cowboy roleplay servers. Have a look around.
+      </p>
+      <ProjectGrid />
     </div>
   );
 }

@@ -75,8 +75,8 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
             exit="exit"
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: 'linear-gradient(135deg,#151515,#252525)',
-              border: '1px solid rgba(132,0,255,0.18)',
+              background: 'linear-gradient(135deg,#161311,#262220)',
+              border: '1px solid rgba(251,146,60,0.18)',
               borderRadius: 16,
               padding: 28,
               maxWidth: '1100px',
@@ -120,13 +120,13 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
                   <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 18 }}>
                     <div style={{
                       width: 52, height: 52, borderRadius: 12, display: 'flex',
-                      alignItems: 'center', justifyContent: 'center', background: 'rgba(132,0,255,0.08)'
+                      alignItems: 'center', justifyContent: 'center', background: 'rgba(251,146,60,0.08)'
                     }}>
                       <span style={{ fontSize: 22 }}>{getProjectIcon(project.category)}</span>
                     </div>
                     <div>
                       <h2 style={{ margin: 0, fontSize: '1.6rem' }}>{project.title}</h2>
-                      {project.label && <div style={{ color: '#8400ff', fontWeight: 600 }}>{project.label}</div>}
+                      {project.label && <div style={{ color: '#fb923c', fontWeight: 600 }}>{project.label}</div>}
                     </div>
                   </div>
 
@@ -140,12 +140,12 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
                       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
                         {project.techStack.map((t, i) => (
                           <span key={i} style={{
-                            background: 'rgba(132,0,255,0.08)',
-                            color: '#b29bff',
+                            background: 'rgba(251,146,60,0.08)',
+                            color: '#fdba74',
                             padding: '6px 10px',
                             borderRadius: 14,
                             fontSize: 13,
-                            border: '1px solid rgba(132,0,255,0.06)'
+                            border: '1px solid rgba(251,146,60,0.06)'
                           }}>{t}</span>
                         ))}
                       </div>
@@ -169,20 +169,20 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
                       gap: 36,
                       alignItems: 'center',
                       padding: '12px 16px',
-                      background: 'rgba(132,0,255,0.04)',
+                      background: 'rgba(251,146,60,0.04)',
                       borderRadius: 8,
-                      border: '1px solid rgba(132,0,255,0.06)',
+                      border: '1px solid rgba(251,146,60,0.06)',
                       marginBottom: 18
                     }}>
                       {project.status && (
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                          <strong style={{ color: '#bda2ff' }}>Status</strong>
+                          <strong style={{ color: '#fdba74' }}>Status</strong>
                           <span style={{ color: '#d0d0d0' }}>{project.status}</span>
                         </div>
                       )}
                       {project.timeline && (
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                          <strong style={{ color: '#bda2ff' }}>Timeline</strong>
+                          <strong style={{ color: '#fdba74' }}>Timeline</strong>
                           <span style={{ color: '#d0d0d0' }}>{project.timeline}</span>
                         </div>
                       )}
@@ -228,7 +228,7 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
                         style={{
                           display: 'inline-flex', alignItems: 'center', gap: 8,
                           padding: '10px 16px', borderRadius: 10,
-                          background: 'linear-gradient(135deg,#8400ff,#9333ea)', color: '#fff', textDecoration: 'none', fontWeight: 600
+                          background: 'linear-gradient(135deg,#fb923c,#ea580c)', color: '#fff', textDecoration: 'none', fontWeight: 600
                         }}
                       >
                         <FaExternalLinkAlt size={16} /> Live Demo
@@ -260,7 +260,7 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
                   <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 14 }}>
                     <div style={{
                       width: 44, height: 44, borderRadius: 10, display: 'flex',
-                      alignItems: 'center', justifyContent: 'center', background: 'rgba(132,0,255,0.06)'
+                      alignItems: 'center', justifyContent: 'center', background: 'rgba(251,146,60,0.06)'
                     }}>
                       <span style={{ fontSize: 20 }}>{getProjectIcon(category)}</span>
                     </div>
@@ -289,7 +289,7 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
                         <div style={{ display: 'flex', gap: 12, alignItems: 'center', flex: 1, minWidth: 0 }}>
                           <div style={{
                             width: 44, height: 44, borderRadius: 8, display: 'flex', alignItems: 'center',
-                            justifyContent: 'center', background: 'rgba(132,0,255,0.06)', flex: '0 0 44px'
+                            justifyContent: 'center', background: 'rgba(251,146,60,0.06)', flex: '0 0 44px'
                           }}>
                             <span>{getProjectIcon(item.category)}</span>
                           </div>
@@ -362,7 +362,7 @@ const ProjectModal = ({ isOpen, onClose, project = null, category = null, items 
                                 gap: 8,
                                 padding: '8px 12px',
                                 borderRadius: 8,
-                                background: 'linear-gradient(135deg,#8400ff,#9333ea)',
+                                background: 'linear-gradient(135deg,#fb923c,#ea580c)',
                                 color: '#fff',
                                 textDecoration: 'none',
                                 fontWeight: 600,

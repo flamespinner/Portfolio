@@ -1,11 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaServer, FaNetworkWired, FaEnvelope, FaFilePdf, FaCode, FaDatabase, FaCloud, FaRobot, FaGamepad, FaCog } from 'react-icons/fa';
-import { TbWorldWww } from "react-icons/tb";
+import { FaServer, FaNetworkWired, FaEnvelope, FaFilePdf, FaCode, FaDatabase, FaCloud, FaGamepad, FaShieldAlt, FaChartBar } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import serverAnim from '../assets/wired-outline-57-server-hover-pinch.json';
 import headshot from '../assets/headshot.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const timelineEvents = [
@@ -36,22 +35,13 @@ const timelineEvents = [
   },
 ];
 
-/* const skills = [
-  { name: 'JavaScript/TypeScript', level: 95, category: 'Frontend', icon: <FaCode /> },
-  { name: 'React/Node.js', level: 90, category: 'Full Stack', icon: <FaCode /> },
-  { name: 'SQL Server/ETL', level: 95, category: 'Data Engineering', icon: <FaDatabase /> },
-  { name: 'PowerShell/Azure', level: 85, category: 'Cloud & Automation', icon: <Lottie animationData={cloudAnim} loop={true} style={{ width: '25px', height: '25px' }} /> },
-  { name: 'Python/Lua', level: 80, category: 'Scripting', icon: <FaRobot /> },
-  { name: 'Docker/DevOps', level: 75, category: 'Infrastructure', icon: <FaCog /> },
-  { name: 'Linux/Windows Server', level: 80, category: 'Infrastructure', icon: <FaServer /> },
-  { name: 'WebDesign', level: 85, category: 'UI/UX', icon: <TbWorldWww /> },
-]; */
-
 const skills = [
-  { category: 'Data & Analytics', icon: <FaDatabase />, skills: ['SQL Server', 'T-SQL', 'Power BI / Fabric', 'Python ETL'] },
-  { category: 'Web Development', icon: <FaCode />, skills: ['JavaScript/TypeScript', 'React', 'Vue', 'Node.js'] },
-  { category: 'Infrastructure & Cloud', icon: <FaCloud />, skills: ['PowerShell', 'Azure', 'Windows Server', 'Linux', 'Intune/RMM'] },
-  { category: 'Game Development', icon: <FaGamepad />, skills: ['Lua', 'RedM/FiveM', 'NUI (Vue)', 'MariaDB'] },
+  { category: 'Data & Analytics', icon: <FaChartBar />, filter: 'data', skills: ['SQL Server', 'T-SQL', 'Power BI / Fabric', 'Python ETL'] },
+  { category: 'Web Development', icon: <FaCode />, filter: 'web', skills: ['JavaScript/TypeScript', 'React', 'Vue', 'Node.js'] },
+  { category: 'Databases', icon: <FaDatabase />, filter: 'data', skills: ['PostgreSQL', 'MariaDB/MySQL', 'MongoDB', 'Snowflake'] },
+  { category: 'Infrastructure & Cloud', icon: <FaCloud />, filter: 'automation', skills: ['PowerShell', 'Azure', 'Windows Server', 'Linux', 'Active Directory', 'UniFi Networking'] },
+  { category: 'Endpoint Management', icon: <FaShieldAlt />, filter: 'automation', skills: ['Microsoft Intune', 'Datto RMM / N-Central', 'LAPS', 'Patch & Compliance'] },
+  { category: 'Game Development', icon: <FaGamepad />, filter: 'game', skills: ['Lua', 'RedM/FiveM', 'NUI (Vue)', 'MariaDB'] },
 ];
 
 
@@ -75,8 +65,9 @@ const achievements = [
 ];
 
 export default function AboutMe() {
+  const navigate = useNavigate();
   const buttonStyle = {
-    background: '#1d4ed8',
+    background: '#ea580c',
     color: '#fff',
     borderRadius: '8px',
     padding: '0.75rem 1.25rem',
@@ -91,7 +82,7 @@ export default function AboutMe() {
   };
 
   const cardStyle = {
-    background: 'rgba(26, 26, 26, 0.7)',
+    background: 'rgba(28, 25, 23, 0.75)',
     backdropFilter: 'blur(10px)',
     WebkitBackdropFilter: 'blur(10px)',
     border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -120,14 +111,14 @@ export default function AboutMe() {
             width: '120px', 
             height: '120px', 
             borderRadius: '50%', 
-            background: 'linear-gradient(135deg, #1d4ed8, #9333ea)',
+            background: 'linear-gradient(135deg, #fdba74, #ea580c)',
             margin: '0 auto 24px',
             display: 'flex',  
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '48px',
             color: '#fff',
-            boxShadow: '0 8px 32px rgba(29, 78, 216, 0.3)',
+            boxShadow: '0 8px 32px rgba(234, 88, 12, 0.3)',
             overflow: 'hidden'
           }}>
             <img 
@@ -146,7 +137,7 @@ export default function AboutMe() {
             fontSize: '3rem', 
             fontWeight: '700', 
             marginBottom: '16px',
-            background: 'linear-gradient(135deg, #1d4ed8, #9333ea)',
+            background: 'linear-gradient(135deg, #fdba74, #ea580c)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
@@ -156,7 +147,7 @@ export default function AboutMe() {
           
           <p style={{ 
             fontSize: '1.2rem', 
-            color: '#9aa3b2', 
+            color: '#a8a29e', 
             maxWidth: '600px', 
             margin: '0 auto',
             lineHeight: '1.6'
@@ -184,14 +175,14 @@ export default function AboutMe() {
                 <h2 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '16px' }}>
                   Professional Summary
                 </h2>
-                <p style={{ lineHeight: 1.6, color: '#bfbfbf', marginBottom: '24px' }}>
+                <p style={{ lineHeight: 1.6, color: '#d6d3d1', marginBottom: '24px' }}>
                   I am a full-stack developer with a passion for building intuitive user experiences and efficient
                   back-end solutions. Over the past few years, I've worked on projects ranging from small personal
                   applications to large enterprise platforms, consistently delivering high-quality code and engaging
                   interfaces. My skill set includes JavaScript, React, Node.js, GraphQL, Docker, and cloud platforms
                   such as AWS and Azure.
                 </p>
-                <p style={{ lineHeight: 1.6, color: '#bfbfbf' }}>
+                <p style={{ lineHeight: 1.6, color: '#d6d3d1' }}>
                   When I'm not coding, you'll find me experimenting with new tech stacks, mountain biking, or enjoying the outdoors.
                 </p>
               </div>
@@ -209,8 +200,8 @@ export default function AboutMe() {
                   <a href="/CV.pdf?v=2" download="Michael_Wilke_CV.pdf" style={{
                     ...buttonStyle,
                     background: 'transparent',
-                    border: '1px solid #1d4ed8',
-                    color: '#1d4ed8'
+                    border: '1px solid #ea580c',
+                    color: '#ea580c'
                   }}>
                     <FaFilePdf size={20} />
                     Download CV
@@ -242,66 +233,60 @@ export default function AboutMe() {
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', // Slightly reduced min-width for better fit
             gap: '20px' 
           }}>
-            {skills.map((skill, index) => (
+            {skills.map((group, index) => (
               <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                key={group.category}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
+                onClick={() => navigate(`/projects?filter=${group.filter}`)}
+                title={`See ${group.category.toLowerCase()} projects`}
                 style={{
                   ...cardStyle,
                   padding: '20px',
-                  cursor: 'default'
+                  cursor: 'pointer'
                 }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.02,
                   boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-                  <div style={{ 
-                    color: '#1d4ed8', 
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '14px' }}>
+                  <div style={{
+                    color: '#fb923c',
                     marginRight: '12px',
-                    fontSize: '20px'
+                    fontSize: '20px',
+                    display: 'flex'
                   }}>
-                    {skill.icon}
+                    {group.icon}
                   </div>
-                  <div>
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: '600', margin: 0 }}>
-                      {skill.name}
-                    </h3>
-                    <p style={{ fontSize: '0.9rem', color: '#9aa3b2', margin: 0 }}>
-                      {skill.category}
-                    </p>
-                  </div>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: '600', margin: 0 }}>
+                    {group.category}
+                  </h3>
                 </div>
-                
-                <div style={{ 
-                  width: '100%', 
-                  height: '6px', 
-                  background: '#1a1a1a', 
-                  borderRadius: '3px',
-                  overflow: 'hidden'
-                }}>
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.level}%` }}
-                    transition={{ duration: 1, delay: 0.2 + 0.1 * index }}
-                    style={{
-                      height: '100%',
-                      background: 'linear-gradient(90deg, #1d4ed8, #9333ea)',
-                      borderRadius: '3px'
-                    }}
-                  />
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {group.skills.map((s, i) => (
+                    <motion.span
+                      key={s}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 + 0.1 * index + 0.05 * i, duration: 0.25 }}
+                      whileHover={{ scale: 1.08, color: '#fdba74' }}
+                      style={{
+                        padding: '5px 12px',
+                        borderRadius: '999px',
+                        background: 'rgba(251, 146, 60, 0.07)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#d6d3d1',
+                        fontSize: '0.82rem',
+                        cursor: 'default'
+                      }}
+                    >
+                      {s}
+                    </motion.span>
+                  ))}
                 </div>
-                <p style={{ 
-                  fontSize: '0.8rem', 
-                  color: '#666', 
-                  margin: '8px 0 0 0',
-                  textAlign: 'right'
-                }}>
-                  {skill.level}%
-                </p>
               </motion.div>
             ))}
           </div>
@@ -337,7 +322,7 @@ export default function AboutMe() {
                 top: '0',
                 bottom: '0',
                 width: '2px',
-                background: 'linear-gradient(to bottom, #1d4ed8, #9333ea)',
+                background: 'linear-gradient(to bottom, #fdba74, #ea580c)',
                 borderRadius: '1px'
               }} />
               
@@ -361,13 +346,13 @@ export default function AboutMe() {
                     width: '16px',
                     height: '16px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #1d4ed8, #9333ea)',
-                    border: '3px solid #07070b',
+                    background: 'linear-gradient(135deg, #fdba74, #ea580c)',
+                    border: '3px solid #0e0d0c',
                     zIndex: 2
                   }} />
                   
                   <div style={{
-                    background: 'rgba(26, 26, 26, 0.5)',
+                    background: 'rgba(28, 25, 23, 0.6)',
                     padding: '16px',
                     borderRadius: '8px',
                     border: '1px solid rgba(255, 255, 255, 0.1)'
@@ -378,7 +363,7 @@ export default function AboutMe() {
                       marginBottom: '8px' 
                     }}>
                       <span style={{ 
-                        color: '#1d4ed8', 
+                        color: '#ea580c', 
                         marginRight: '8px',
                         fontSize: '16px'
                       }}>
@@ -398,7 +383,7 @@ export default function AboutMe() {
                     </h3>
                     <p style={{ 
                       margin: 0, 
-                      color: '#9aa3b2',
+                      color: '#a8a29e',
                       fontSize: '0.9rem',
                       lineHeight: '1.4'
                     }}>
@@ -432,11 +417,11 @@ export default function AboutMe() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + 0.1 * index }}
                   style={{
-                    background: 'rgba(26, 26, 26, 0.5)',
+                    background: 'rgba(28, 25, 23, 0.6)',
                     padding: '20px',
                     borderRadius: '8px',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderLeft: '4px solid #1d4ed8'
+                    borderLeft: '4px solid #ea580c'
                   }}
                 >
                   <div style={{ 
@@ -454,8 +439,8 @@ export default function AboutMe() {
                       {achievement.title}
                     </h3>
                     <span style={{
-                      background: 'rgba(29, 78, 216, 0.2)',
-                      color: '#1d4ed8',
+                      background: 'rgba(234, 88, 12, 0.2)',
+                      color: '#ea580c',
                       padding: '4px 8px',
                       borderRadius: '4px',
                       fontSize: '0.75rem',
@@ -466,7 +451,7 @@ export default function AboutMe() {
                   </div>
                   <p style={{ 
                     margin: 0, 
-                    color: '#9aa3b2',
+                    color: '#a8a29e',
                     fontSize: '0.9rem',
                     lineHeight: '1.4'
                   }}>
@@ -491,14 +476,14 @@ export default function AboutMe() {
         >
           <div style={{
             ...cardStyle,
-            background: 'linear-gradient(135deg, rgba(29, 78, 216, 0.1), rgba(147, 51, 234, 0.1))',
-            border: '1px solid rgba(29, 78, 216, 0.3)'
+            background: 'linear-gradient(135deg, rgba(234, 88, 12, 0.1), rgba(251, 146, 60, 0.1))',
+            border: '1px solid rgba(234, 88, 12, 0.3)'
           }}>
             <h2 style={{ fontSize: '1.8rem', marginBottom: '16px' }}>
               Let's Work Together
             </h2>
             <p style={{ 
-              color: '#9aa3b2', 
+              color: '#a8a29e', 
               marginBottom: '24px',
               fontSize: '1.1rem'
             }}>
@@ -516,8 +501,8 @@ export default function AboutMe() {
               <a href="/projects" style={{
                 ...buttonStyle,
                 background: 'transparent',
-                border: '1px solid #1d4ed8',
-                color: '#1d4ed8'
+                border: '1px solid #ea580c',
+                color: '#ea580c'
               }}>
                 View My Work
               </a>
