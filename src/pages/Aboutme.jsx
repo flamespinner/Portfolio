@@ -48,7 +48,7 @@ const skills = [
 const achievements = [
   { 
     title: 'SQL Restore Automation', impact: 'Zero-touch',
-    description: 'Event-driven Azure pipeline that restores SQL Server databases from blob storage automatically — in production at AION.' 
+    description: 'Event-driven Azure pipeline that restored SQL Server databases from blob storage automatically. Ran in production at AION.'
   },
   { 
     title: 'AION Reporting Suite', impact: 'Company-wide',
