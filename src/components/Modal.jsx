@@ -15,7 +15,7 @@ const categoryIcons = {
 const getProjectIcon = (category) => categoryIcons[category] || <FaFolderOpen />;
 
 const statusColors = (status = '') => {
-  if (/archive/i.test(status)) return { background: 'rgba(148,163,184,0.12)', color: '#94a3b8', border: '1px solid rgba(148,163,184,0.3)' };
+  if (/archive|retired/i.test(status)) return { background: 'rgba(148,163,184,0.12)', color: '#94a3b8', border: '1px solid rgba(148,163,184,0.3)' };
   if (/rebuild|planned|wip/i.test(status)) return { background: 'rgba(245,158,11,0.15)', color: '#fbbf24', border: '1px solid rgba(245,158,11,0.35)' };
   return { background: 'rgba(34,197,94,0.15)', color: '#4ade80', border: '1px solid rgba(34,197,94,0.35)' };
 };
@@ -125,10 +125,12 @@ const ProjectModal = ({ isOpen, onClose, project = null }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#fff',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                fontSize: 0,
+                lineHeight: 1
               }}
             >
-              <FaTimes />
+              <FaTimes size={18} />
             </button>
 
             {/* Header */}
@@ -271,6 +273,18 @@ const ProjectModal = ({ isOpen, onClose, project = null }) => {
                 padding: 24, cursor: 'zoom-out'
               }}
             >
+              <button
+                onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+                aria-label="Close screenshot"
+                style={{
+                  position: 'absolute', top: 18, right: 18,
+                  background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '50%',
+                  width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#fff', cursor: 'pointer', fontSize: 0, lineHeight: 1
+                }}
+              >
+                <FaTimes size={18} />
+              </button>
               <img
                 src={project.screenshots[lightbox].src}
                 alt={project.screenshots[lightbox].caption || project.title}

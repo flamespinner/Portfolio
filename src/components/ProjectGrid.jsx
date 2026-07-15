@@ -43,8 +43,8 @@ const projects = [
     title: 'SQL Restore Automation',
     label: 'Automation',
     tags: ['automation', 'data'],
-    description: 'Event-driven Azure pipeline that restores SQL Server databases from blob storage. Zero-touch, running in production.',
-    fullDescription: 'Enterprise-grade automation pipeline for SQL Server database restores, designed to integrate seamlessly with Azure services and third-party providers. Currently in active production use.',
+    description: 'Event-driven Azure pipeline that restored SQL Server databases from blob storage. Zero-touch, ran in production.',
+    fullDescription: 'Enterprise-grade automation pipeline for SQL Server database restores, designed to integrate seamlessly with Azure services and third-party providers. Ran in production until the workflow it served was retired.',
     githubUrl: 'https://github.com/flamespinner/sql-restore-automation',
     techStack: ['PowerShell', 'Azure Blob Storage', 'SQL Server', 'Azure Functions', 'Event Grid', 'MSGraph'],
     features: [
@@ -55,7 +55,7 @@ const projects = [
       'Built-in exception handling and retry logic',
       'Hybrid: Azure cloud + on-premises SQL infrastructure',
     ],
-    status: 'Active Production',
+    status: 'Retired',
     timeline: '2025',
   },
   {
@@ -78,16 +78,18 @@ const projects = [
     title: 'Calico County RedM Resources',
     label: 'Game Development',
     tags: ['game', 'calico'],
-    description: 'Custom Lua gameplay systems and Vue NUI interfaces for a Red Dead Redemption 2 roleplay server.',
-    fullDescription: 'Custom game development resources for the Calico County RedM server: gameplay systems and mechanics in Lua, player-facing NUI interfaces in Vue, and MariaDB-backed persistence — built and maintained as lead developer.',
+    description: 'Custom Lua gameplay systems with Vue NUI interfaces: law enforcement MDT, player market, mail, and more.',
+    fullDescription: 'Custom game development resources for the Calico County RedM server, built and maintained as lead developer: server-side Lua gameplay systems with Vue NUI interfaces and MariaDB-backed persistence, serving the live 600+ player community.',
     liveUrl: 'https://calicocountyrp.com',
     techStack: ['Lua', 'Vue', 'JavaScript', 'RedM API', 'MariaDB'],
     features: [
-      'Custom roleplay systems and mechanics',
-      'Vue-based NUI interface design',
-      'Server-side scripting and optimization',
-      'Database-backed player data',
+      'MDT (mobile data terminal) for law enforcement roleplay',
+      'Player market and economy systems',
+      'In-game mail system',
+      'Character and player data persistence in MariaDB',
+      'Vue NUI interfaces rendered in-game',
     ],
+    screenshots: [],
     status: 'Active Development',
     timeline: '2022–Present',
   },
@@ -230,7 +232,7 @@ const projects = [
 ];
 
 const statusBadge = (status) => {
-  if (/archive/i.test(status)) return 'pg-badge pg-badge--archive';
+  if (/archive|retired/i.test(status)) return 'pg-badge pg-badge--archive';
   if (/rebuild|planned|wip/i.test(status)) return 'pg-badge pg-badge--wip';
   return 'pg-badge pg-badge--live';
 };
