@@ -74,7 +74,7 @@ export default function PortfolioHomepage() {
     <main style={mainStyle}>
       <Seo
         title="Home"
-        description="Michael Wilke — full-stack developer and IT systems/data analyst. SQL Server ETL pipelines, React apps, and automation, from enterprise reporting to a 300+ member game server."
+        description="Full-stack developer and IT/data analyst building SQL Server pipelines, React apps, and automation — from enterprise reporting systems to a 300+ member online community I built full-stack."
         path="/"
       />
       {/* Phase 1/2: center typing */}
