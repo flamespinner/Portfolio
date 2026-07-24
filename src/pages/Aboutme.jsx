@@ -5,6 +5,7 @@ import Lottie from 'lottie-react';
 import serverAnim from '../assets/wired-outline-57-server-hover-pinch.json';
 import headshot from '../assets/headshot.jpg';
 import { Link, useNavigate } from 'react-router-dom';
+import Seo from '../components/Seo';
 
 
 const timelineEvents = [
@@ -99,7 +100,12 @@ export default function AboutMe() {
       width: '100%',
       padding: '4rem'
     }}>
-        
+        <Seo
+          title="About Me"
+          description="Full-stack developer and IT systems/data analyst at AION Management. SQL Server, Power BI/Fabric, Python ETL, React/Vue, Azure, and Windows Server admin — plus founding Calico County RP, a 300+ member RedM community."
+          path="/aboutme"
+        />
+
         {/* Hero Section */}
         <motion.section 
           initial={{ opacity: 0, y: 20 }}

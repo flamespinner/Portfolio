@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaArrowRight } from "react-icons/fa";
 import CodeWindow from "../components/CodeWindow"; // adjust path if needed
+import Seo from "../components/Seo";
 import { useNavigate } from "react-router-dom";
 
 
@@ -71,6 +72,11 @@ export default function PortfolioHomepage() {
 
   return (
     <main style={mainStyle}>
+      <Seo
+        title="Home"
+        description="Michael Wilke — full-stack developer and IT systems/data analyst. SQL Server ETL pipelines, React apps, and automation, from enterprise reporting to a 300+ member game server."
+        path="/"
+      />
       {/* Phase 1/2: center typing */}
       {!showSplit && (
         <div style={centerTextStyle}>

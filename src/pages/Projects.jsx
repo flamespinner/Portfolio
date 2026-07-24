@@ -1,8 +1,14 @@
 import ProjectGrid from "../components/ProjectGrid";
+import Seo from "../components/Seo";
 
 function Projects() {
   return (
     <div style={{ width: "100%", marginBottom: "2rem", padding: "1rem" }}>
+      <Seo
+        title="Projects"
+        description="A look at Michael Wilke's projects: SQL Server ETL pipelines and Azure automation for enterprise reporting, and Calico Core, a full-stack player management platform for a 300+ member RedM community."
+        path="/projects"
+      />
       <h1 style={{
         textAlign: "center",
         fontSize: "2.5rem",
