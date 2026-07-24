@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { MdEmail, MdPhone, MdLocationOn, MdSend } from 'react-icons/md';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { gsap } from 'gsap';
+import Seo from '../components/Seo';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -78,6 +79,11 @@ export default function ContactPage() {
 
   return (
     <div style={{ minHeight: '100vh', width: '100%'}}>
+      <Seo
+        title="Contact"
+        description="Get in touch with Michael Wilke — open to new opportunities and collaborations in full-stack development, data engineering, and IT systems."
+        path="/contact"
+      />
       <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '24px' }}>
         {/* Header Section */}
         <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '48px' }}>

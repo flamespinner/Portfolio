@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import NavbarSide from './components/NavbarSide'
+import PersonSchema from './components/PersonSchema'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import AboutMe from './pages/Aboutme'
@@ -10,6 +11,7 @@ import './App.css'
 export default function App() {
   return (
     <div>
+      <PersonSchema />
       <NavbarSide />
       <div className="app-content">
         <div style={{ 
